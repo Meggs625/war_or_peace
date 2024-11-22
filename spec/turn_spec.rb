@@ -37,5 +37,26 @@ RSpec.describe Turn do
   it "Should hold cards won from war" do
     expect(@turn.spoils_of_war).to eq([])
   end 
+  # will need additional tests for different turn types when more logic is built
+  it "Should determine what the game type is" do 
+    @turn.define_turn_type
+    expect(@turn.type).to eq(:basic)
+  end
+
+  it "Should determine a turn winner" do
+    winner = @turn.game_winner
+    expect(winner).to eq("Marsha")
+  end
+
+  it "Should add the correct amount to the spoils pile" do
+    @turn.pile_cards
+    expect(@turn.spoils_of_war).to eq([@card_1, @card_5])
+  end
+
+  it "Should add the spoils to the winning player's deck" do
+    @turn.pile_cards
+    @turn.award_spoils
+    expect(@turn.player_1.deck.cards).to include(@card_5)
+  end
 
 end
