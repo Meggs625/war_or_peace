@@ -38,9 +38,9 @@ class Turn
 
   def pile_cards
     if @type == :war
-      player_1_pile = @player_1.deck.cards.slice(0, 3)
-      player_2_pile = @player_2.deck.cards.slice(0, 3)
-      @spoils_of_war.concat([player_1_pile, player_2_pile])
+      player_1_pile = @player_1.deck.cards.slice!(0, 3)
+      player_2_pile = @player_2.deck.cards.slice!(0, 3)
+      @spoils_of_war.concat(player_1_pile, player_2_pile)
     elsif @type == :mutually_assured_destruction
       player_1_pile = @player_1.deck.cards.slice!(0, 3)
       player_2_pile = @player_2.deck.cards.slice!(0, 3)

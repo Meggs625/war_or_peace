@@ -1,5 +1,6 @@
 require 'rspec'
 require './lib/game.rb'
+require './lib/player.rb'
 
 RSpec.describe Game do
 
@@ -23,7 +24,13 @@ RSpec.describe Game do
   end
 
   it "Should create two new playes" do
+    new_game = Game.new
+    deck_1, deck_2 = new_game.create_new_decks
+    player_1 = new_game.create_player("First", deck_1)
+    expect(player_1.name).to eq "Player First"
 
+    player_2 = new_game.create_player("Second", deck_1)
+    expect(player_2.name).to eq "Player Second"
   end
 
 end
