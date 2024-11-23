@@ -33,4 +33,14 @@ RSpec.describe Game do
     expect(player_2.name).to eq "Player Second"
   end
 
+  it "Should begin game play when given the GO" do
+  end
+
+  it "Should advance the turn number when a turn is played" do
+
+  end
+
+  it "Should end the game when there is a winner or a draw" do
+  end
+
 end

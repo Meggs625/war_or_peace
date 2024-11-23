@@ -9,10 +9,11 @@ class Turn
   end
 
   def define_turn_type
-    if @player_1.deck.cards[0].rank == @player_2.deck.cards[0].rank 
-      @type = :war
-    elsif  (@player_1.deck.cards[0].rank == @player_2.deck.cards[0].rank) && (@player_1.deck.cards[2].rank == @player_2.deck.cards[2].rank)
+    puts @player_2.deck.cards[0].rank
+    if  (@player_1.deck.cards[0].rank == @player_2.deck.cards[0].rank) && (@player_1.deck.cards[2].rank == @player_2.deck.cards[2].rank)
       @type = :mutually_assured_destruction
+    elsif @player_1.deck.cards[0].rank == @player_2.deck.cards[0].rank 
+      @type = :war
     else
       @type = :basic
     end
