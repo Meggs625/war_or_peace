@@ -95,3 +95,6 @@ RSpec.describe Turn do
   # end
 
 end
+
+#Need to complete the other tests in a more robust sense
+#Need to add a check for when there are less than the reuqired amounts of cards to perform a War or MAD

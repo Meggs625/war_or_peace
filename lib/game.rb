@@ -71,7 +71,6 @@ class Game
     else 
       ending_string << "#{game_winner} won #{@turn.spoils_of_war.length} cards"
     end
-    puts @player_1.deck.cards.length
     p ending_string
 
     @turn.award_spoils

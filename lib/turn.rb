@@ -9,8 +9,7 @@ class Turn
   end
 
   def define_turn_type
-    puts @player_2.deck.cards[0].rank
-    if  (@player_1.deck.cards[0].rank == @player_2.deck.cards[0].rank) && (@player_1.deck.cards[2].rank == @player_2.deck.cards[2].rank)
+    if  (@player_1.deck.cards[0].rank == @player_2.deck.cards[0].rank) && (@player_1.deck.cards[2]&.rank == @player_2.deck.cards[2]&.rank)
       @type = :mutually_assured_destruction
     elsif @player_1.deck.cards[0].rank == @player_2.deck.cards[0].rank 
       @type = :war
@@ -21,7 +20,9 @@ class Turn
 
   def game_winner
     if @type == :war
-      if @player_1.deck.cards[2].rank > @player_2.deck.cards[2].rank
+      p1_active_card = @player_1.deck.cards.length >= 3 ? @player_1.deck.cards[2].rank : @player_1.deck.cards.last.rank
+      p2_active_card = @player_2.deck.cards.length >= 3 ? @player_2.deck.cards[2].rank : @player_1.deck.cards.last.rank
+      if p1_active_card > p2_active_card
         @player_1.name
       else
         @player_2.name
