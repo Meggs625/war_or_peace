@@ -9,10 +9,10 @@ class Turn
   end
 
   def define_turn_type
-    if @player_1.deck.cards[0].rank == @player_2.deck.cards[0].rank 
-      @type = :war
-    elsif  (@player_1.deck.cards[0].rank == @player_2.deck.cards[0].rank) && (@player_1.deck.cards[2].rank == @player_2.deck.cards[2].rank)
+    if  (@player_1.deck.cards[0].rank == @player_2.deck.cards[0].rank) && (@player_1.deck.cards[2]&.rank == @player_2.deck.cards[2]&.rank)
       @type = :mutually_assured_destruction
+    elsif @player_1.deck.cards[0].rank == @player_2.deck.cards[0].rank 
+      @type = :war
     else
       @type = :basic
     end
@@ -20,7 +20,9 @@ class Turn
 
   def game_winner
     if @type == :war
-      if @player_1.deck.cards[2].rank > @player_2.deck.cards[2].rank
+      p1_active_card = @player_1.deck.cards.length >= 3 ? @player_1.deck.cards[2].rank : @player_1.deck.cards.last.rank
+      p2_active_card = @player_2.deck.cards.length >= 3 ? @player_2.deck.cards[2].rank : @player_1.deck.cards.last.rank
+      if p1_active_card > p2_active_card
         @player_1.name
       else
         @player_2.name
@@ -38,9 +40,9 @@ class Turn
 
   def pile_cards
     if @type == :war
-      player_1_pile = @player_1.deck.cards.slice(0, 3)
-      player_2_pile = @player_2.deck.cards.slice(0, 3)
-      @spoils_of_war.concat([player_1_pile, player_2_pile])
+      player_1_pile = @player_1.deck.cards.slice!(0, 3)
+      player_2_pile = @player_2.deck.cards.slice!(0, 3)
+      @spoils_of_war.concat(player_1_pile, player_2_pile)
     elsif @type == :mutually_assured_destruction
       player_1_pile = @player_1.deck.cards.slice!(0, 3)
       player_2_pile = @player_2.deck.cards.slice!(0, 3)
